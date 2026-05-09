@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Мій Ритм</title>
+    <title>Мой Ритм</title>
     <script src="https://jsdelivr.net"></script>
     <style>
         body { background-color: #fdfbf7; margin: 0; overflow: hidden; height: 100vh; }
@@ -17,7 +17,6 @@
         const labels = []; const ann = []; const pers = []; const lun = [];
         const daysUkr = ['нд', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
         let start = new Date(2026, 4, 9); 
-
         for (let i = 0; i < 90; i++) {
             let d = new Date(start); d.setDate(start.getDate() + i);
             labels.push(`${d.getDate()}.${(d.getMonth()+1).toString().padStart(2,'0')} (${daysUkr[d.getDay()]})`);
@@ -27,15 +26,14 @@
             pers.push(b + 0.35 * Math.cos(2 * Math.PI * (i - 6) / 33)); 
             lun.push(b + 0.25 * Math.cos(2 * Math.PI * (i - 7 + 14.75) / 29.5));
         }
-
         new Chart(ctx, {
             type: 'line',
             data: {
                 labels: labels,
                 datasets: [
-                    { label: 'Рік', data: ann, borderColor: '#2d6a4f', borderWidth: 12, tension: 0.5, pointRadius: 0, alpha: 0.2 },
-                    { label: 'Я', data: pers, borderColor: '#0077b6', borderWidth: 4, tension: 0.5, pointRadius: (c) => [6, 23, 39, 56, 72].includes(c.dataIndex) ? 8 : 0, pointBackgroundColor: '#0077b6' },
-                    { label: 'Місяць', data: lun, borderColor: '#ee9b00', borderWidth: 2, tension: 0.5, pointRadius: (c) => [7, 22, 36, 51].includes(c.dataIndex) ? 6 : 0, pointBackgroundColor: '#ee9b00' }
+                    { label: 'Год', data: ann, borderColor: '#2d6a4f', borderWidth: 10, tension: 0.5, pointRadius: 0 },
+                    { label: 'Я', data: pers, borderColor: '#0077b6', borderWidth: 4, tension: 0.5, pointRadius: (c) => [6, 39, 72].includes(c.dataIndex) ? 8 : 0, pointBackgroundColor: '#0077b6' },
+                    { label: 'Луна', data: lun, borderColor: '#ee9b00', borderWidth: 2, tension: 0.5, pointRadius: (c) => [7, 22, 36, 51, 66, 81].includes(c.dataIndex) ? 6 : 0, pointBackgroundColor: '#ee9b00' }
                 ]
             },
             options: {
